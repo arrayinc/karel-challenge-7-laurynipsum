@@ -1,3 +1,4 @@
+
 /* File: Challenge-7.k
  ---------------------------
 Now that Karel has mastered Halloween, it’s time to celebrate a
@@ -23,3 +24,47 @@ and that there are no desks right up against the wall.
 
 When Karel is finished, all the desks in the room should have a valentine!
 */
+
+import "turns";
+
+function checkForDesks(){
+	move();
+	turnLeft();
+	while(frontIsClear()){
+		move();
+		turnRight();
+		move();
+		if(rightIsClear()){
+			turnAround();
+			move();
+			turnRight();
+		}
+		else {
+			putBeepersOnDesks();
+		}
+	}
+}
+
+function putBeepersOnDesks(){
+	putBeeper();
+	while(frontIsClear()){
+		move();
+		if(rightIsBlocked()) {
+			putBeeper();
+		}
+	}
+}
+function turnBackAround(){
+	turnAround();
+	while(frontIsClear()){
+			move();
+	}	
+	turnAround();
+}
+function Solve(){
+	checkForDesks();
+	turnBackAround();
+	checkForDesks();
+	turnBackAround();
+	checkForDesks();
+}
